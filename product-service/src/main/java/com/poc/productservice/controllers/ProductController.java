@@ -1,13 +1,13 @@
 package com.poc.productservice.controllers;
 
-import com.poc.productservice.dto.OrderToCreate;
-import com.poc.productservice.dto.ProductToOrder;
+import com.poc.productservice.entities.Product;
 import com.poc.productservice.services.ProductService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,27 +18,39 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @Value("${my.test}")
-    private String testString;
-
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/testMessage")
-    public String getTestMessage() {
-        return testString;
+
+//    @Value("${my.test}")
+//    private String testString;
+
+
+//    @GetMapping("/testMessage")
+//    public String getTestMessage() {
+//        return testString;
+//    }
+
+    /**
+     * Calls the ProductService to get all the Product entities in the database.
+     * @return OK + List of Products.
+     */
+    @GetMapping()
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
-    @PatchMapping("/place-order")
-    public ResponseEntity<String> placeOrder(@RequestBody OrderToCreate order) {
-        productService.placeOrderNormally(order);
-        return new ResponseEntity<>("Order placed successfully.", HttpStatus.OK);
-    }
 
-    @PatchMapping("/place-order-unstable")
-    public ResponseEntity<String> placeOrderUnstable(@RequestBody OrderToCreate order) {
-        productService.placeOrderFailing(order);
-        return new ResponseEntity<>("", HttpStatus.OK);
-    }
+//    @PatchMapping("/place-order")
+//    public ResponseEntity<String> placeOrder(@RequestBody OrderToCreate order) {
+//        productService.placeOrderNormally(order);
+//        return new ResponseEntity<>("Order placed successfully.", HttpStatus.OK);
+//    }
+//
+//    @PatchMapping("/place-order-unstable")
+//    public ResponseEntity<String> placeOrderUnstable(@RequestBody OrderToCreate order) {
+//        productService.placeOrderFailing(order);
+//        return new ResponseEntity<>("", HttpStatus.OK);
+//    }
 }
