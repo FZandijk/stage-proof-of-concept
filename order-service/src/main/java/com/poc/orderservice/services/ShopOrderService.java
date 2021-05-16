@@ -1,6 +1,6 @@
 package com.poc.orderservice.services;
 
-import com.poc.orderservice.entities.ShopOrder;
+import com.poc.orderservice.models.ShopOrder;
 import com.poc.orderservice.repositories.ShopOrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,11 @@ public class ShopOrderService {
         this.shopOrderRepository = shopOrderRepository;
     }
 
+    /**
+     * Inserts an Order in the database.
+     * @param order The order to insert.
+     */
     public void placeShopOrder(ShopOrder order) {
-        shopOrderRepository.save(order);
+        shopOrderRepository.insert(order);
     }
 }

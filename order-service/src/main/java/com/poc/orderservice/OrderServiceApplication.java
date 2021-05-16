@@ -6,6 +6,8 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.UUID;
+
 @SpringBootApplication
 public class OrderServiceApplication {
 
@@ -13,9 +15,4 @@ public class OrderServiceApplication {
 		SpringApplication.run(OrderServiceApplication.class, args);
 	}
 
-	@LoadBalanced
-	@Bean
-	RestTemplate template() {
-		return new RestTemplate();
-	}
 }

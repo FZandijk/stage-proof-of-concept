@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class AdminProductControllerTests {
+public class AdminProductControllerUnitTests {
 
     private final ProductService productService = Mockito.mock(ProductService.class);
     private final AdminProductController controller = new AdminProductController(productService);
